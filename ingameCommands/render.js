@@ -5,6 +5,11 @@ const imgur = require('imgur-anonymous-uploader');
 
 module.exports = {
     name: 'render',
+<<<<<<< HEAD
+=======
+    description: 'Render a player\'s item.',
+    args: '[ign] [profile] (slot)',
+>>>>>>> 4b14611 (init)
     execute: async (discordClient, message, messageAuthor) => {
         if (config.ingameCommands.render && config.keys.imgurClientId) {
             const uploader = new imgur(config.keys.imgurClientId);
@@ -27,7 +32,10 @@ module.exports = {
             const searchedPlayer = await getPlayer(username, profile).catch((err) => {
                 return minecraftClient.chat(`/gc @${messageAuthor} ${err}`);
             });
+<<<<<<< HEAD
             if (!searchedPlayer) return;
+=======
+>>>>>>> 4b14611 (init)
             const playerProfile = searchedPlayer.memberData;
 
             const inventory = playerProfile?.inv_contents?.data;

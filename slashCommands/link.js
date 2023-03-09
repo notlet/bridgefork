@@ -65,4 +65,19 @@ module.exports = {
             ],
         });
     },
+<<<<<<< HEAD
+=======
+    async forceLink (id, name) {
+	try {
+		const playerData = await getGuildMemberData(name);
+		const links = JSON.parse(fs.readFileSync('./data/guildLinks.json'));
+        	const linkUsernames = JSON.parse(fs.readFileSync('./data/guildLinkUsernames.json'));
+        	links[id] = playerData?.uuid;
+        	linkUsernames[id] = playerData?.player.displayname;
+        	fs.writeFileSync('./data/guildLinks.json', JSON.stringify(links, null, 2));
+        	fs.writeFileSync('./data/guildLinkUsernames.json', JSON.stringify(linkUsernames, null, 2));
+		return "everything went well (hopefully)\n" + JSON.stringify(linkUsernames);
+	} catch (e) {return "error, letgame probably did something wrong because hes stupid " + e; }
+    }
+>>>>>>> 4b14611 (init)
 };

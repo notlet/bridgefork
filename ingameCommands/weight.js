@@ -4,6 +4,11 @@ const { getSenitherWeight, getLilyWeight } = require('../helper/weight.js');
 
 module.exports = {
     name: 'weight',
+<<<<<<< HEAD
+=======
+    description: 'Get a player\'s weight.',
+    args: '[ign] [profile]',
+>>>>>>> 4b14611 (init)
     execute: async (discordClient, message, messageAuthor) => {
         if (config.ingameCommands.weight) {
             let { 1: username, 2: profile } = message.split(' ');
@@ -13,7 +18,10 @@ module.exports = {
             const searchedPlayer = await getPlayer(username, profile).catch((err) => {
                 return minecraftClient.chat(`/gc @${messageAuthor} ${err}`);
             });
+<<<<<<< HEAD
             if (!searchedPlayer) return;
+=======
+>>>>>>> 4b14611 (init)
             const playerProfile = searchedPlayer.memberData;
 
             const senitherWeight = getSenitherWeight(playerProfile);

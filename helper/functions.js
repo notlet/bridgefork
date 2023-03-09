@@ -4,6 +4,10 @@ const config = require('../config.json');
 const nbt = require('prismarine-nbt');
 const util = require('util');
 const parseNbt = util.promisify(nbt.parse);
+<<<<<<< HEAD
+=======
+const nodeemoji = require("node-emoji");
+>>>>>>> 4b14611 (init)
 
 function includesIgnored(message) {
     return config.channels.logOptions.ingameChatLogFilter.some((ignored) => message.includes(ignored));
@@ -26,7 +30,11 @@ function isValidUsername(username) {
     }
 }
 
+<<<<<<< HEAD
 async function getPlayer(player, profile) {
+=======
+async function getPlayer(player, profile, getPlayerData) {
+>>>>>>> 4b14611 (init)
     if (typeof player !== 'string' || !isValidUsername(player)) {
         throw new Error('Invalid Username');
     }
@@ -38,6 +46,13 @@ async function getPlayer(player, profile) {
     if (!hypixelResponse) throw new Error("Couldn't get a response from the API");
     if (hypixelResponse.profiles === null) throw new Error(`Couldn\'t find any Skyblock profile that belongs to ${player}`);
 
+<<<<<<< HEAD
+=======
+    let hypixelResponse2 = {player: null}
+    if (getPlayerData) hypixelResponse2 = await hypixelRequest(`https://api.hypixel.net/player?uuid=${mojangResponse}`, true);
+    if (!hypixelResponse2 && getPlayerData) hypixelResponse2 = {player: null};
+
+>>>>>>> 4b14611 (init)
     let profileData = getLastProfile(hypixelResponse);
     if (profile) {
         profileData = hypixelResponse.profiles.find((p) => p.cute_name.toLowerCase() === profile.toLowerCase()) || getLastProfile(hypixelResponse);
@@ -45,6 +60,7 @@ async function getPlayer(player, profile) {
 
     if (!profileData) throw new Error(`Couldn't find the specified Skyblock profile that belongs to ${player}.`);
 
+<<<<<<< HEAD
     return { memberData: profileData.members[mojangResponse], profileData, profiles: hypixelResponse.profiles, uuid: mojangResponse };
 }
 
@@ -52,6 +68,9 @@ async function getMuseum(profile, uuid) {
     const hypixelResponse = await hypixelRequest(`https://api.hypixel.net/skyblock/museum?profile=${profile}`, true);
     if (!hypixelResponse) throw new Error("Couldn't get a response from the API");
     return hypixelResponse.members?.[uuid];
+=======
+    return { memberData: profileData.members[mojangResponse], profileData, profiles: hypixelResponse.profiles, playerData: hypixelResponse2.player };
+>>>>>>> 4b14611 (init)
 }
 
 async function getGuildMemberData(player) {
@@ -110,6 +129,7 @@ async function formatMentions(client, message) {
         }
     }
     if ((message.includes('<a:') || message.includes('<:')) && message.includes('>')) {
+<<<<<<< HEAD
         let mentions = [...(message?.match(/<a:\w+:\d+>/g) || []), ...(message?.match(/<:\w+:\d+>/g) || [])];
         for (const mention of mentions) {
             const emojiName = mention.replace(/[0-9]/g, '').replace(/<a:/g, '').replace(/:>/g, '').replace(/<:/g, '');
@@ -117,6 +137,16 @@ async function formatMentions(client, message) {
         }
     }
 
+=======
+            const customEmojis = message.match(/<a?:[^:]+:\d+>/g);
+            for (const emoji of customEmojis) {
+                message = message.replace(emoji, `:${emoji.replace(/<a?:([^:]+):\d+>/, "$1")}:`);
+            }
+    }
+
+    message = nodeemoji.unemojify(message);
+
+>>>>>>> 4b14611 (init)
     return message;
 }
 
@@ -305,7 +335,10 @@ module.exports = {
     hypixelLevel,
     formatMentions,
     getPlayer,
+<<<<<<< HEAD
     getMuseum,
+=======
+>>>>>>> 4b14611 (init)
     decodeData,
     createCollector,
     getGuildMemberData,

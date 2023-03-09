@@ -9,6 +9,7 @@ module.exports = {
         const cmd = interaction.commandName;
         const command = discordClient.commands.get(cmd);
         if (!command) return;
+<<<<<<< HEAD
         await interaction.deferReply();
 
         command.execute(discordClient, interaction).catch((e) => {
@@ -16,6 +17,21 @@ module.exports = {
             return interaction.editReply({
                 embeds: [errorEmbed(null, 'An error occurred while executing this command.')],
             });
+=======
+        if (!command.doNotDefer) await interaction.deferReply();
+
+        command.execute(discordClient, interaction).catch((e) => {
+            console.error(e);
+            if (!command.doNotDefer) {
+                return interaction.editReply({
+                    embeds: [errorEmbed(null, 'An error occurred while executing this command.')],
+                });
+            } else {
+                return interaction.reply({
+                    embeds: [errorEmbed(null, 'An error occurred while executing this command.')],
+                });
+            }
+>>>>>>> 4b14611 (init)
         });
     },
 };

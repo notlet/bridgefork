@@ -3,6 +3,11 @@ const sourcebin = require('sourcebin');
 
 module.exports = {
     name: 'paste',
+<<<<<<< HEAD
+=======
+    description: 'Upload a paste to sourcebin.',
+    args: '(paste)',
+>>>>>>> 4b14611 (init)
     execute: async (discordClient, message, messageAuthor) => {
         if (config.ingameCommands.paste) {
             const paste = message.split(' ').slice(1).join(' ');

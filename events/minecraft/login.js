@@ -11,7 +11,11 @@ module.exports = {
             if (config.channels.logOptions.hypixelLogin && config.channels.log) {
                 await discordClient.channels.cache
                     .get(config.channels.log)
+<<<<<<< HEAD
                     ?.send(`${config.minecraft.ingameName + ' has' || 'I have'} logged in to Hypixel.`);
+=======
+                    ?.send(`${'**' + config.minecraft.ingameName + '** has' || 'I have'} logged in to Hypixel.`);
+>>>>>>> 4b14611 (init)
             }
             console.log('[MINECRAFT] Logged in!');
             emittedEvent = true;
@@ -20,9 +24,17 @@ module.exports = {
             setTimeout(() => {
                 minecraftClient.chat('/locraw');
             }, 5000);
+<<<<<<< HEAD
             setInterval(() => {
                 minecraftClient.chat('/locraw');
             }, 1000 * 60);
+=======
+
+            minecraftClient.on("login", () => setTimeout(() => minecraftClient.chat("/locraw"), 4000));
+            setInterval(() => {
+                minecraftClient.chat('/locraw');
+            }, 1000 * 60 * 5);
+>>>>>>> 4b14611 (init)
         }
     },
 };

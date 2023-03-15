@@ -1,8 +1,4 @@
 const Canvas = require('canvas');
-<<<<<<< HEAD
-const config = require('../config.json');
-=======
->>>>>>> 4b14611 (init)
 Canvas.registerFont('./fonts/MinecraftRegular-Bmg3.ttf', { family: 'Minecraft' });
 Canvas.registerFont('./fonts/unifont.ttf', { family: 'MinecraftUnicode' });
 
@@ -25,60 +21,6 @@ const RGBA_COLOR = {
     f: 'rgba(255,255,255,1)',
 };
 
-<<<<<<< HEAD
-const multiplier = config?.options?.imageSizeMultiplier || 1;
-
-function getHeight(message) {
-    const canvas = Canvas.createCanvas(1, 1);
-    const ctx = canvas.getContext('2d');
-    const splitMessageSpace = message.split(' ');
-    for (const [i, msg] of Object.entries(splitMessageSpace)) {
-        if (!msg.startsWith('§')) splitMessageSpace[i] = `§r${msg}`;
-    }
-    const splitMessage = splitMessageSpace.join(' ').split(/§|\n/g);
-    splitMessage.shift();
-    ctx.font = `${(40 * multiplier).toFixed()}px Minecraft, MinecraftUnicode`;
-
-    let width = 5;
-    let height = 35 * multiplier;
-
-    for (const msg of splitMessage) {
-        const currentMessage = msg.substring(1);
-        if (width + ctx.measureText(currentMessage).width > 1000 || msg.charAt(0) === 'n') {
-            width = 5;
-            height += 40 * multiplier;
-        }
-        width += ctx.measureText(currentMessage).width;
-    }
-    if (width == 5) height -= 40 * multiplier;
-
-    return height + (10 * multiplier);
-}
-
-function generateMessageImage(message) {
-    const canvasHeight = getHeight(message);
-    const canvas = Canvas.createCanvas(1000, canvasHeight);
-    const ctx = canvas.getContext('2d');
-    const splitMessageSpace = message.split(' ');
-    for (const [i, msg] of Object.entries(splitMessageSpace)) {
-        if (!msg.startsWith('§')) splitMessageSpace[i] = `§r${msg}`;
-    }
-    const splitMessage = splitMessageSpace.join(' ').split(/§|\n/g);
-    splitMessage.shift();
-    ctx.shadowOffsetX = 4 * multiplier;
-    ctx.shadowOffsetY = 4 * multiplier;
-    ctx.shadowColor = '#131313';
-    ctx.font = `${(40 * multiplier).toFixed()}px Minecraft, MinecraftUnicode`;
-
-    let width = 5;
-    let height = 35 * multiplier;
-    for (const msg of splitMessage) {
-        const colorCode = RGBA_COLOR[msg.charAt(0)];
-        const currentMessage = msg.substring(1);
-        if (width + ctx.measureText(currentMessage).width > 1000 || msg.charAt(0) === 'n') {
-            width = 5;
-            height += 40 * multiplier;
-=======
 function getHeight(message, cwidth) {
     const canvas = Canvas.createCanvas(1, 1);
     const ctx = canvas.getContext('2d');
@@ -107,9 +49,9 @@ function getHeight(message, cwidth) {
     return height + 10;
 }
 
-function generateMessageImage(message, cwidth) {
-    const canvasHeight = getHeight(message);
-    const canvas = Canvas.createCanvas(cwidth || 1300, canvasHeight);
+function generateMessageImage(message, cwidth, background) {
+    const canvasHeight = getHeight(message, cwidth || undefined);
+    const canvas = Canvas.createCanvas(cwidth || 1300, background ? canvasHeight + 20 : canvasHeight);
     const ctx = canvas.getContext('2d');
     let splitMessageSpace = message.split(' ');
     for (const [i, msg] of Object.entries(splitMessageSpace)) {
@@ -118,10 +60,23 @@ function generateMessageImage(message, cwidth) {
     splitMessageSpace = splitMessageSpace.join(' ').replaceAll('\n', '\nn').split(' ');
     const splitMessage = splitMessageSpace.join(' ').split(/§|\n/g);
     splitMessage.shift();
+    
     ctx.shadowOffsetX = 4;
     ctx.shadowOffsetY = 4;
     ctx.shadowColor = '#131313';
     ctx.font = '40px Minecraft, MinecraftUnicode';
+
+    if (background) {
+        ctx.globalAlpha = 0.3;
+        ctx.fillStyle = 'black';
+        const lines = message.replace(/§[\w\d]/g, "").split('\n').map(l => " " + l);
+        const linelengths = lines.map(e => ctx.measureText(e).width);
+        const longestLineIndex = linelengths.findIndex(i => i == Math.max(...linelengths));
+        const longestLine = linelengths[longestLineIndex] + ctx.measureText("  ").width;
+        ctx.fillRect(0, 0, longestLine, canvas.height);
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = 'white';
+    }
 
     let width = 5;
     let height = 35;
@@ -131,16 +86,11 @@ function generateMessageImage(message, cwidth) {
         if (width + ctx.measureText(" " + currentMessage).width > (cwidth || 1300) || msg.charAt(0) === 'n') {
             width = 5;
             height += 40;
->>>>>>> 4b14611 (init)
         }
         if (colorCode) {
             ctx.fillStyle = colorCode;
         }
-<<<<<<< HEAD
-        ctx.fillText(currentMessage, width, height);
-=======
-        ctx.fillText(" " + currentMessage, width, height);
->>>>>>> 4b14611 (init)
+        ctx.fillText(" " + currentMessage, width, background ? height + 10 : height);
         width += ctx.measureText(currentMessage).width;
     }
     return canvas.toBuffer();

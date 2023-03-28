@@ -1,8 +1,5 @@
 const { skillTables } = require('../constants/global.js');
-<<<<<<< HEAD
-=======
 const { numberformatter } = require('./functions.js');
->>>>>>> 4b14611 (init)
 
 function getTableAndMax(skill, manualCap) {
     const table =
@@ -22,21 +19,14 @@ function getTableAndMax(skill, manualCap) {
  * @param {{skill: String, decimals: Number, manualCap: Number}} data skill name, number of decimals to return, and manual level cap
  * @returns {Number} skill level
  */
-function getSkillLevel(experience, { skill, decimals = 0, manualCap } = { decimals: 0 }) {
-<<<<<<< HEAD
-    if (!experience) return 0;
-    const { table, maxLevel } = getTableAndMax(skill, manualCap);
-    let level = skillTables[table].filter((exp) => exp <= experience).length - 1;
-    if (level >= maxLevel) return maxLevel;
-=======
+function getSkillLevel(experience, { skill, decimals = 0, manualCap, totalExp } = { decimals: 0 }) {
     if (!experience) return {level: 0, overflow: 0, fancy: `0`};
     const { table, maxLevel } = getTableAndMax(skill, manualCap);
     let level = skillTables[table].filter((exp) => exp <= experience).length - 1;
     if (level >= maxLevel) {
-	let maxLevelExp = skillTables[table][maxLevel];
-	return {level: maxLevel, overflow: experience - maxLevelExp, fancy:`${maxLevel} + ${numberformatter(experience - maxLevelExp, 2)} exp`};
+	    let maxLevelExp = skillTables[table][maxLevel];
+	    return {level: maxLevel, overflow: experience - maxLevelExp, fancy: totalExp ? `${maxLevel} (${numberformatter(experience, 2)} exp)` : `${maxLevel} + ${numberformatter(experience - maxLevelExp, 2)} exp`};
     }
->>>>>>> 4b14611 (init)
 
     if (decimals) {
         const nextExp = getNextLevelExperience({ level }, { skill });
@@ -44,13 +34,8 @@ function getSkillLevel(experience, { skill, decimals = 0, manualCap } = { decima
         level = Number(level.toFixed(decimals));
     }
 
-<<<<<<< HEAD
-    if (level < 0) return 0;
-    else return level;
-=======
     if (level < 0) return {level: 0, overflow: 0, fancy: `0`};
-    else return {level: level, overflow: 0, fancy: `${level}`};
->>>>>>> 4b14611 (init)
+    else return {level: level, overflow: 0, fancy: totalExp ? `${level} (${numberformatter(experience, 2)} exp)` : level};
 }
 
 /**
@@ -76,15 +61,6 @@ function getNextLevelExperience({ level, experience }, { skill, manualCap } = {}
 function getSkillAverage(profileData, decimals = 0) {
     const skills = ['farming', 'mining', 'combat', 'foraging', 'fishing', 'enchanting', 'alchemy', 'taming'];
     const levels = skills.map((skill) => {
-<<<<<<< HEAD
-        const manualCap =
-            skill === 'farming' && profileData.jacob2?.perks.farming_level_cap > -1 ? 50 + profileData.jacob2?.perks.farming_level_cap : null;
-        return getSkillLevel(profileData[`experience_skill_${skill}`], { skill, decimals, manualCap });
-    });
-    const average = levels.reduce((acc, val) => acc + val) / levels.length;
-
-    return Number(average.toFixed(decimals));
-=======
         const manualCap = skill === 'farming' && profileData.jacob2?.perks.farming_level_cap > -1 ? 50 + profileData.jacob2?.perks.farming_level_cap : null;
         return getSkillLevel(profileData[`experience_skill_${skill}`], { skill, decimals, manualCap });
     });
@@ -94,7 +70,6 @@ function getSkillAverage(profileData, decimals = 0) {
     const average = parseFloat(totalLevels / levels.length).toFixed(2);
 
     return {"levels": levels, "average": average};
->>>>>>> 4b14611 (init)
 }
 
 module.exports = {

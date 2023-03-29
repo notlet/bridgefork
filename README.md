@@ -74,11 +74,15 @@ The bot also includes an integrated frag bot that can be used by the guild. The 
 |`skills`| Will return a player's skill average| `!skills [player] [profile]`|`!skills Altpapier`| `Altpapier's skill average is 48.56` |
 |`weight`| Will return a player's senither and lily weight| `!weight [player] [profile]`|`!weight Altpapier`|`Altpapier has 8,375 senither weight and 12,202 lily weight.` |
 <<<<<<< HEAD
+<<<<<<< HEAD
 |`networth`| Will return a player's networth|`!networth/nw [player] [profile]`|`!networth Altpapier`|`Altpapier's networth is 3.703B`|
 |`level`| Will return a player's SkyBlock level|`!level [player] [profile]`|`!level Altpapier`|`Altpapier's SkyBlock level is 201.39.`|
 =======
 |`networth`| Will return a player's networth|`!networth/nw [player] [profile]`|`!networth Altpapier`|`Altpapier's networth is 3,703,575,174`
 >>>>>>> 4b14611 (init)
+=======
+|`networth`| Will return a player's networth|`!networth/nw [player] [profile]`|`!networth Altpapier`|`Altpapier's networth is 3,703,575,174`
+>>>>>>> 927c547 (fixed data files to not be included)
 
 ### Slash Commands
 
@@ -108,10 +112,14 @@ The included API can be used to send post requests to execute commands or send m
 
 -   Git
 <<<<<<< HEAD
+<<<<<<< HEAD
 -   Node.js >= `16`
 =======
 -   Note.js >= `16`
 >>>>>>> 4b14611 (init)
+=======
+-   Note.js >= `16`
+>>>>>>> 927c547 (fixed data files to not be included)
 -   Minecraft Account
 -   Discord Bot (Token)
 
@@ -241,9 +249,12 @@ Here you can set which events should be broadcasted into the `Guild Ingame Chat`
 	"ingameChatConsoleLog": true,
 	"discordUseSlowCommand": true,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"imageSizeMultiplier": 1,
 =======
 >>>>>>> 4b14611 (init)
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
 	"discordDefaultSlow": 0,
 	"messageSentConfirmation": {
 		"checkmarkReactions": true,
@@ -255,10 +266,14 @@ Here you can set which events should be broadcasted into the `Guild Ingame Chat`
 `ingameChatConsoleLog` will show the Minecraft chat in the terminal. If you wish for it to not show in the console, make sure to set that value to `false`.
 `discordUseSlowCommand` will also set a slow mode on the `Guild Ingame Chat` if this was enabled or disabled by a guild staff member using `/g slow`. By default, the slow mode on the channel is set to 0 seconds. You can edit that by changing the `discordDefaultSlow` value to any number (in seconds).
 <<<<<<< HEAD
+<<<<<<< HEAD
 The message sent confirmation will react on messages sent by Discord members in the `Guild Ingame Chat`. If the message a member sent was sent successfully the bot will react with ✅. If the message was not sent successfully because of `You cannot say the same message twice!` or other reasons the bot will react with ⛔. To disable either both or one of those set the value of `checkmarkReactions` and/or `failedReactions` to `false`. If you want to make the message images a bit smaller you can reduce the `imageSizeMultiplier` to for example `0.8`.
 =======
 The message sent confirmation will react on messages sent by Discord members in the `Guild Ingame Chat`. If the message a member sent was sent successfully the bot will react with ✅. If the message was not sent successfully because of `You cannot say the same message twice!` or other reasons the bot will react with ⛔. To disable either both or one of those set the value of `checkmarkReactions` and/or `failedReactions` to `false`.
 >>>>>>> 4b14611 (init)
+=======
+The message sent confirmation will react on messages sent by Discord members in the `Guild Ingame Chat`. If the message a member sent was sent successfully the bot will react with ✅. If the message was not sent successfully because of `You cannot say the same message twice!` or other reasons the bot will react with ⛔. To disable either both or one of those set the value of `checkmarkReactions` and/or `failedReactions` to `false`.
+>>>>>>> 927c547 (fixed data files to not be included)
 
 7. **Ingame Commands**
 
@@ -269,11 +284,15 @@ The message sent confirmation will react on messages sent by Discord members in 
 	"skills": true,
 	"weight": true,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"networth": true,
 	"level": true
 =======
 	"networth": true
 >>>>>>> 4b14611 (init)
+=======
+	"networth": true
+>>>>>>> 927c547 (fixed data files to not be included)
 }
 ```
 
@@ -343,6 +362,7 @@ You can also set what routes should be available by either setting the value to 
 	"enabled": false,
 	"autoAccept": false,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"autoAcceptBlacklist": [],
 	"requirements": {
 		"skyblockLevel": 0,
@@ -350,6 +370,9 @@ You can also set what routes should be available by either setting the value to 
 =======
 	"requirements": {
 >>>>>>> 4b14611 (init)
+=======
+	"requirements": {
+>>>>>>> 927c547 (fixed data files to not be included)
 		"senitherWeight": 0,
 		"lilyWeight": 0,
 		"hypixelLevel": 0,
@@ -360,6 +383,7 @@ You can also set what routes should be available by either setting the value to 
 			"wolf": 0,
 			"enderman": 0,
 			"blaze": 0
+<<<<<<< HEAD
 <<<<<<< HEAD
 		},
 		"bwLevel": 0,
@@ -372,6 +396,8 @@ You can also set what routes should be available by either setting the value to 
 To enable this feature, set `enabled` to `true`. If you wish for players that request to join the guild and meet the requirements to automatically be accepted into the guild, set `autoAccept` to `true`. If `autoAccept` is set to `false` this will only send a message with the players requirements into the officer chat. If a kicked player is rejoining the guild and gets accepted with auto accept, you can add their uuid or username into the `autoAcceptBlacklist` array. If you wish for players to be accepted even if they only meet a couple of requirements, you can add the `minRequired` key to the `guildRequirement` object with the minimum required requirements.
 If you wish to not include one of the requirement options, please just keep the value at `0`. Else you can set the values of the requirements you want your guild to have, to whatever you want. Set the `acceptEitherSkyblockOrBedwars` value to `true` if you want the player to meet the requirements if it either meets the SkyBlock or Bedwars requirements.
 =======
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
 		}
 	}
 }
@@ -379,7 +405,10 @@ If you wish to not include one of the requirement options, please just keep the 
 
 To enable this feature, set `enabled` to `true`. If you wish for players that request to join the guild and meet the requirements to automatically be accepted into the guild, set `autoAccept` to `true`. If `autoAccept` is set to `false` this will only send a message with the players requirements into the officer chat. If you wish for players to be accepted even if they only meet a couple of requirements, you can add the `minRequired` key to the `guildRequirement` object with the minimum required requirements.
 If you wish to not include one of the requirement options, please just keep the value at `0`. Else you can set the values of the requirements you want your guild to have, to whatever you want.  
+<<<<<<< HEAD
 >>>>>>> 4b14611 (init)
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
 To check other player requirements, you can use the `/requirements` command in a Discord channel.
 
 12. **Guild Welcome**

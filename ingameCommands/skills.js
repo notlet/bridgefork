@@ -5,10 +5,15 @@ const { getSkillAverage } = require('../helper/skills');
 module.exports = {
     name: 'skills',
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     description: 'Get a player\'s skills and skill average.',
     args: '[ign] [profile]',
 >>>>>>> 4b14611 (init)
+=======
+    description: 'Get a player\'s skills and skill average.',
+    args: '[ign] [profile]',
+>>>>>>> 927c547 (fixed data files to not be included)
     execute: async (discordClient, message, messageAuthor) => {
         if (config.ingameCommands.skills) {
             let { 1: username, 2: profile } = message.split(' ');
@@ -16,22 +21,29 @@ module.exports = {
             if (!username) username = messageAuthor;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             const searchedPlayer = await getPlayer(username, profile).catch((err) => {
                 return minecraftClient.chat(`/gc @${messageAuthor} ${err}`);
             });
             if (!searchedPlayer) return;
 =======
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
             //const searchedPlayer = {memberData: require('../apitest.json').profiles[3].members["f164eb183b9943449ae10b2dcf9c9ff7"]};
 
             const searchedPlayer = await getPlayer(username, profile).catch((err) => {
                 return minecraftClient.chat(`/gc @${messageAuthor} ${err}`);
             });
             if (!searchedPlayer?.memberData) return;
+<<<<<<< HEAD
 >>>>>>> 4b14611 (init)
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
             const playerProfile = searchedPlayer.memberData;
 
             const skills = getSkillAverage(playerProfile, 2);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
             if (skills == 0) {
                 return minecraftClient.chat(`/gc @${messageAuthor}${messageAuthor === username ? "'s" : ` ${username}'s`} skills API is disabled.`);
@@ -41,6 +53,8 @@ module.exports = {
     },
 };
 =======
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
             if (skills.average == 0) {
                 return minecraftClient.chat(`/gc @${messageAuthor}${messageAuthor === username ? "'s" : ` ${username}'s`} skills API is disabled.`);
             }
@@ -51,4 +65,7 @@ module.exports = {
 };
 
 // const skills = ['farming', 'mining', 'combat', 'foraging', 'fishing', 'enchanting', 'alchemy', 'taming'];
+<<<<<<< HEAD
 >>>>>>> 4b14611 (init)
+=======
+>>>>>>> 927c547 (fixed data files to not be included)

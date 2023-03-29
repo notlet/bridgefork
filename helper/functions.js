@@ -5,9 +5,13 @@ const nbt = require('prismarine-nbt');
 const util = require('util');
 const parseNbt = util.promisify(nbt.parse);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 const nodeemoji = require("node-emoji");
 >>>>>>> 4b14611 (init)
+=======
+const nodeemoji = require("node-emoji");
+>>>>>>> 927c547 (fixed data files to not be included)
 
 function includesIgnored(message) {
     return config.channels.logOptions.ingameChatLogFilter.some((ignored) => message.includes(ignored));
@@ -31,10 +35,14 @@ function isValidUsername(username) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 async function getPlayer(player, profile) {
 =======
 async function getPlayer(player, profile, getPlayerData) {
 >>>>>>> 4b14611 (init)
+=======
+async function getPlayer(player, profile, getPlayerData) {
+>>>>>>> 927c547 (fixed data files to not be included)
     if (typeof player !== 'string' || !isValidUsername(player)) {
         throw new Error('Invalid Username');
     }
@@ -47,12 +55,18 @@ async function getPlayer(player, profile, getPlayerData) {
     if (hypixelResponse.profiles === null) throw new Error(`Couldn\'t find any Skyblock profile that belongs to ${player}`);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
     let hypixelResponse2 = {player: null}
     if (getPlayerData) hypixelResponse2 = await hypixelRequest(`https://api.hypixel.net/player?uuid=${mojangResponse}`, true);
     if (!hypixelResponse2 && getPlayerData) hypixelResponse2 = {player: null};
 
+<<<<<<< HEAD
 >>>>>>> 4b14611 (init)
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
     let profileData = getLastProfile(hypixelResponse);
     if (profile) {
         profileData = hypixelResponse.profiles.find((p) => p.cute_name.toLowerCase() === profile.toLowerCase()) || getLastProfile(hypixelResponse);
@@ -60,6 +74,7 @@ async function getPlayer(player, profile, getPlayerData) {
 
     if (!profileData) throw new Error(`Couldn't find the specified Skyblock profile that belongs to ${player}.`);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     return { memberData: profileData.members[mojangResponse], profileData, profiles: hypixelResponse.profiles, uuid: mojangResponse };
 }
@@ -71,6 +86,9 @@ async function getMuseum(profile, uuid) {
 =======
     return { memberData: profileData.members[mojangResponse], profileData, profiles: hypixelResponse.profiles, playerData: hypixelResponse2.player };
 >>>>>>> 4b14611 (init)
+=======
+    return { memberData: profileData.members[mojangResponse], profileData, profiles: hypixelResponse.profiles, playerData: hypixelResponse2.player };
+>>>>>>> 927c547 (fixed data files to not be included)
 }
 
 async function getGuildMemberData(player) {
@@ -130,6 +148,7 @@ async function formatMentions(client, message) {
     }
     if ((message.includes('<a:') || message.includes('<:')) && message.includes('>')) {
 <<<<<<< HEAD
+<<<<<<< HEAD
         let mentions = [...(message?.match(/<a:\w+:\d+>/g) || []), ...(message?.match(/<:\w+:\d+>/g) || [])];
         for (const mention of mentions) {
             const emojiName = mention.replace(/[0-9]/g, '').replace(/<a:/g, '').replace(/:>/g, '').replace(/<:/g, '');
@@ -138,6 +157,8 @@ async function formatMentions(client, message) {
     }
 
 =======
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
             const customEmojis = message.match(/<a?:[^:]+:\d+>/g);
             for (const emoji of customEmojis) {
                 message = message.replace(emoji, `:${emoji.replace(/<a?:([^:]+):\d+>/, "$1")}:`);
@@ -146,7 +167,10 @@ async function formatMentions(client, message) {
 
     message = nodeemoji.unemojify(message);
 
+<<<<<<< HEAD
 >>>>>>> 4b14611 (init)
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
     return message;
 }
 
@@ -336,9 +360,12 @@ module.exports = {
     formatMentions,
     getPlayer,
 <<<<<<< HEAD
+<<<<<<< HEAD
     getMuseum,
 =======
 >>>>>>> 4b14611 (init)
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
     decodeData,
     createCollector,
     getGuildMemberData,

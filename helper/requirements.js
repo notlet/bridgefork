@@ -1,6 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const config = require('../config.json');
 <<<<<<< HEAD
+<<<<<<< HEAD
 const { hypixelRequest, hypixelLevel, addCommas, toFixed } = require('./functions.js');
 const { getBedwarsLevel } = require('./getBedwarsLevel');
 const { getSkillAverage, getSkillLevel } = require('./skills');
@@ -40,6 +41,8 @@ async function getRequirements(uuid) {
         bwLevel: null,
         bwFKDR: null,
 =======
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
 const { hypixelRequest, hypixelLevel, addCommas } = require('./functions.js');
 const { getSkillAverage, getSkillLevel } = require('./skills');
 const { getSenitherWeight, getLilyWeight } = require('./weight');
@@ -71,13 +74,17 @@ async function getRequirements(uuid) {
         //},
 	level: null,
         //total: null,
+<<<<<<< HEAD
 >>>>>>> 4b14611 (init)
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
     };
 
     const sbData = await hypixelRequest(`https://api.hypixel.net/skyblock/profiles?uuid=${uuid}`, true);
     if ((sbData?.profiles?.length || 0) > 0) {
         for (const profile of sbData.profiles) {
             const memberData = profile?.members?.[uuid] || {};
+<<<<<<< HEAD
 <<<<<<< HEAD
             const skyblockLevel = Number(toFixed((memberData.leveling?.experience || 0) / 100, 2));
             let networth = 0;
@@ -154,6 +161,8 @@ function getRequirementEmbed(requirementData, username, officerChatMessage, uuid
     let requirementsMetBedwars = 0;
     const requirementsEmbed = new MessageEmbed().setTitle(`${username}'s Requirements`).setColor('BLURPLE');
 =======
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
             //let senitherWeight = getSenitherWeight(memberData);
             //senitherWeight = senitherWeight.total + senitherWeight.totalOverflow;
             //const lilyWeight = getLilyWeight(memberData).total;
@@ -188,7 +197,10 @@ function getRequirementEmbed(requirementData, username, officerChatMessage, uuid
 function getRequirementEmbed(requirementData, username, officerChatMessage, discordLink, user, overLevel15) {
     let requirementsMet = 0;
     const requirementsEmbed = new MessageEmbed().setTitle(`${username}'s Requirements${discordLink ? " (" + discordLink + ")" : ""}`).setColor('BLURPLE');
+<<<<<<< HEAD
 >>>>>>> 4b14611 (init)
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
 
     let requirementsDescription = [];
     for (const [stat, requirement] of Object.entries(config.guildRequirement.requirements)) {
@@ -204,9 +216,12 @@ function getRequirementEmbed(requirementData, username, officerChatMessage, disc
             if (slayerRequirementsMet >= Object.keys(requirement).length) {
                 requirementsMet++;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 requirementsMetSkyblock++;
 =======
 >>>>>>> 4b14611 (init)
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
             }
             requirementsDescription.push(
                 `**Slayer**: \`${slayerDescription.join('/')}\` ${slayerRequirementsMet >= Object.keys(requirement).length ? '✅' : '⛔'}`
@@ -214,6 +229,7 @@ function getRequirementEmbed(requirementData, username, officerChatMessage, disc
         } else {
             if (requirementData[stat] >= requirement) {
                 requirementsMet++;
+<<<<<<< HEAD
 <<<<<<< HEAD
                 if (!stat.includes('bw')) requirementsMetSkyblock++;
                 else requirementsMetBedwars++;
@@ -223,10 +239,15 @@ function getRequirementEmbed(requirementData, username, officerChatMessage, disc
                 requirementsDescription.push(`**${LONG_STATS[stat]}**: \`${addCommas(requirementData[stat]?.toFixed())}\` ✅`);
             } else if (LONG_STATS[stat] !== undefined) {
 >>>>>>> 4b14611 (init)
+=======
+                requirementsDescription.push(`**${LONG_STATS[stat]}**: \`${addCommas(requirementData[stat]?.toFixed())}\` ✅`);
+            } else if (LONG_STATS[stat] !== undefined) {
+>>>>>>> 927c547 (fixed data files to not be included)
                 requirementsDescription.push(`**${LONG_STATS[stat]}**: \`${addCommas(requirementData[stat]?.toFixed())}\` ⛔`);
             }
         }
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
     let totalBwStats = 0;
     for (const stat of Object.keys(config.guildRequirement.requirements)) {
@@ -256,6 +277,8 @@ function getRequirementEmbed(requirementData, username, officerChatMessage, disc
             if (isBlacklisted) requirementsDescription.unshift(`**${username}** does not meet the requirements and is blacklisted!`);
             else requirementsDescription.unshift(`**${username}** does not meet the requirements and is not allowed to join the guild.`);
 =======
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
 
     requirementsDescription.push(`**Is in Server**: ${user ? "✅" : "⛔"}`);
     requirementsDescription.push(`**Over MEE6 Lvl 15**: ${overLevel15 ? "✅" : "⛔"}`);
@@ -271,7 +294,10 @@ function getRequirementEmbed(requirementData, username, officerChatMessage, disc
             requirementsEmbed.setColor('GREEN');
         } else {
             requirementsDescription.unshift(`**${username}** does not meet the requirements and is not allowed to join the guild.`);
+<<<<<<< HEAD
 >>>>>>> 4b14611 (init)
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
             requirementsEmbed.setColor('RED');
         }
     }

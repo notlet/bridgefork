@@ -10,6 +10,7 @@ module.exports = {
         const command = discordClient.commands.get(cmd);
         if (!command) return;
 <<<<<<< HEAD
+<<<<<<< HEAD
         await interaction.deferReply();
 
         command.execute(discordClient, interaction).catch((e) => {
@@ -18,6 +19,8 @@ module.exports = {
                 embeds: [errorEmbed(null, 'An error occurred while executing this command.')],
             });
 =======
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
         if (!command.doNotDefer) await interaction.deferReply();
 
         command.execute(discordClient, interaction).catch((e) => {
@@ -31,7 +34,10 @@ module.exports = {
                     embeds: [errorEmbed(null, 'An error occurred while executing this command.')],
                 });
             }
+<<<<<<< HEAD
 >>>>>>> 4b14611 (init)
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
         });
     },
 };

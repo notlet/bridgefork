@@ -1,9 +1,13 @@
 const { getRequirements, getRequirementEmbed, LONG_STATS } = require('../helper/requirements.js');
 <<<<<<< HEAD
+<<<<<<< HEAD
 const { nameToUUID, createCollector, n, addCommas } = require('../helper/functions.js');
 =======
 const { nameToUUID, createCollector, n, getGuildMemberData } = require('../helper/functions.js');
 >>>>>>> 4b14611 (init)
+=======
+const { nameToUUID, createCollector, n, getGuildMemberData } = require('../helper/functions.js');
+>>>>>>> 927c547 (fixed data files to not be included)
 const { Constants, MessageButton, MessageActionRow, MessageEmbed } = require('discord.js');
 const { STRING } = Constants.ApplicationCommandOptionTypes;
 const { errorEmbed } = require('../helper/embeds.js');
@@ -31,11 +35,14 @@ module.exports = {
         if (uuid) {
             const requirementData = await getRequirements(uuid).catch((err) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 return interaction.editReply({ embeds: [errorEmbed(null, err.message)] });
             });
 
             const requirementEmbed = getRequirementEmbed(requirementData, player, false, uuid);
 =======
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
                 //return interaction.editReply({ embeds: [errorEmbed(null, err)] });
             });
             if (!requirementData?.level) { console.log(requirementData) ; return interaction.editReply({ embeds: [errorEmbed(null, "Couldn't get a response from the API.")] })};
@@ -47,7 +54,10 @@ module.exports = {
             let overLevel15 = user?.roles?.cache?.has("904780894152327169");
 
             const requirementEmbed = getRequirementEmbed(requirementData, player, false, discordLink, user, overLevel15);
+<<<<<<< HEAD
 >>>>>>> 4b14611 (init)
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
 
             const reply = await interaction.editReply({ embeds: [requirementEmbed], components: [REQUIREMENT_BUTTON] });
 
@@ -69,16 +79,22 @@ module.exports = {
                                         return `**${LONG_STATS[name]}**: \`${map.join('/')}\``;
                                     } else if (!isNaN(value)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                                         return `**${LONG_STATS[name]}**: \`${addCommas(value)}\``;
                                     }
                                 })
                                 .join('\n')}
 =======
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
                                         return `**${LONG_STATS[name]}**: \`${value}\``;
                                     }
                                 })
                                 .join('\n') + '\n**Be in this Server.**\n**MEE6 Level**: \`15+\`'}
+<<<<<<< HEAD
 >>>>>>> 4b14611 (init)
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
                         `)
                             ),
                         ],

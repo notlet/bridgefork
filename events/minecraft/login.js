@@ -12,10 +12,14 @@ module.exports = {
                 await discordClient.channels.cache
                     .get(config.channels.log)
 <<<<<<< HEAD
+<<<<<<< HEAD
                     ?.send(`${config.minecraft.ingameName + ' has' || 'I have'} logged in to Hypixel.`);
 =======
                     ?.send(`${'**' + config.minecraft.ingameName + '** has' || 'I have'} logged in to Hypixel.`);
 >>>>>>> 4b14611 (init)
+=======
+                    ?.send(`${'**' + config.minecraft.ingameName + '** has' || 'I have'} logged in to Hypixel.`);
+>>>>>>> 927c547 (fixed data files to not be included)
             }
             console.log('[MINECRAFT] Logged in!');
             emittedEvent = true;
@@ -25,16 +29,22 @@ module.exports = {
                 minecraftClient.chat('/locraw');
             }, 5000);
 <<<<<<< HEAD
+<<<<<<< HEAD
             setInterval(() => {
                 minecraftClient.chat('/locraw');
             }, 1000 * 60);
 =======
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
 
             minecraftClient.on("login", () => setTimeout(() => minecraftClient.chat("/locraw"), 4000));
             setInterval(() => {
                 minecraftClient.chat('/locraw');
             }, 1000 * 60 * 5);
+<<<<<<< HEAD
 >>>>>>> 4b14611 (init)
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
         }
     },
 };

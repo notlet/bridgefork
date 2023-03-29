@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 const config = require('../../config.json');
 const { formatMentions } = require('../../helper/functions.js');
 const messagesReactionCache = new Map();
@@ -93,6 +94,8 @@ module.exports = {
         };
     },
 =======
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
 const { MessageAttachment } = require('discord.js')
 const config = require('../../config.json');
 const { formatMentions, numberformatter } = require('../../helper/functions.js');
@@ -208,5 +211,8 @@ module.exports = {
 			react,
 		};
 	},
+<<<<<<< HEAD
 >>>>>>> 4b14611 (init)
+=======
+>>>>>>> 927c547 (fixed data files to not be included)
 };

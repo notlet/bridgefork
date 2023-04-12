@@ -37,7 +37,7 @@ module.exports = {
 =======
 >>>>>>> 927c547 (fixed data files to not be included)
 
-            minecraftClient.on("login", () => setTimeout(() => minecraftClient.chat("/locraw"), 4000));
+            minecraftClient.on("login", () => setTimeout(() => minecraftClient.chat("/locraw"), 10000));
             setInterval(() => {
                 minecraftClient.chat('/locraw');
             }, 1000 * 60 * 5);

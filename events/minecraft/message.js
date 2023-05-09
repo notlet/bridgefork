@@ -2,44 +2,19 @@ const axios = require('axios');
 const fs = require('fs');
 const { MessageAttachment } = require('discord.js');
 const config = require('../../config.json');
-<<<<<<< HEAD
-<<<<<<< HEAD
-const { formatDiscordMessage, includesIgnored, isGuildEvent, isShortGuildEvent, sleep, nameToUUID, addCommas } = require('../../helper/functions.js');
-const generateMessageImage = require('../../helper/messageToImage.js');
-const { getRequirements, getRequirementEmbed } = require('../../helper/requirements.js');
-
-const SHORT_STATS = {
-    skyblockLevel: 'LVL',
-    networth: 'NW',
-=======
-=======
->>>>>>> 927c547 (fixed data files to not be included)
 const { formatDiscordMessage, includesIgnored, isGuildEvent, isShortGuildEvent, sleep, nameToUUID, addCommas, getGuildMemberData } = require('../../helper/functions.js');
 const generateMessageImage = require('../../helper/messageToImage.js');
 const { getRequirements, getRequirementEmbed } = require('../../helper/requirements.js');
 const nodeemoji = require('node-emoji')
 
 const SHORT_STATS = {
-<<<<<<< HEAD
->>>>>>> 4b14611 (init)
-=======
->>>>>>> 927c547 (fixed data files to not be included)
     lilyWeight: 'LILY',
     senitherWeight: 'SEN',
     skillAverage: 'SA',
     hypixelLevel: 'HLVL',
     catacombs: 'CATA',
     slayer: 'SLAYER',
-<<<<<<< HEAD
-<<<<<<< HEAD
-    bwLevel: 'BWSTARS',
-    bwFKDR: 'BWFKDR',
-=======
     level: 'SBLVL'
->>>>>>> 4b14611 (init)
-=======
-    level: 'SBLVL'
->>>>>>> 927c547 (fixed data files to not be included)
 };
 
 let messagesCache = [];
@@ -70,19 +45,6 @@ module.exports = {
     getLatestMessages,
     async execute(discordClient, message) {
         const msgString = message.toString();
-<<<<<<< HEAD
-<<<<<<< HEAD
-        const msgStringColor = message.toMotd();
-        // LIMBO CHECK
-        try {
-            const parsedMessage = JSON.parse(msgString);
-            if (parsedMessage.server !== 'limbo' && parsedMessage) {
-                return minecraftClient.chat('\u00a7');
-            } else if (parsedMessage.server === 'limbo') {
-                return;
-=======
-=======
->>>>>>> 927c547 (fixed data files to not be included)
         let msgStringColor = message.toMotd();
 	if (msgString.startsWith("Guild > ")) { //§2Guild > §b[MVP§2+§b] let_game §3[Summon]§f: i love amomger
 		let match = msgStringColor.substr(10).match(/(§[a-f0-9]{1})(\[[§A-Za-z0-9\+]+\] )?([0-9A-Za-z_]{3,22})/i);
@@ -99,15 +61,19 @@ module.exports = {
         // LIMBO CHECK
         try {
             const parsedMessage = JSON.parse(msgString);
-            if (parsedMessage.gametype !== 'SKYBLOCK'  && parsedMessage) {
-		if (parsedMessage.gametype == 'MAIN') return setTimeout(() => minecraftClient.chat("/play skyblock"), 1000);
-                else return setTimeout(() => {minecraftClient.chat("/lobby"); setTimeout(() => {minecraftClient.chat("/play skyblock")}, 5000)}, 1000);
-            } else if (parsedMessage.gametype === 'SKYBLOCK') {
-                return minecraftClient.chat("/warp home");
-<<<<<<< HEAD
->>>>>>> 4b14611 (init)
-=======
->>>>>>> 927c547 (fixed data files to not be included)
+            if (config.options.limbo) {
+                if (parsedMessage.server !== 'limbo' && parsedMessage) {
+                    return minecraftClient.chat('\u00a7');
+                } else if (parsedMessage.server === 'limbo') {
+                    return;
+                }
+            } else {
+                if (parsedMessage.gametype !== 'SKYBLOCK'  && parsedMessage) {
+                    if (parsedMessage.gametype == 'MAIN') return setTimeout(() => minecraftClient.chat("/play skyblock"), 1000);
+                    else return setTimeout(() => {minecraftClient.chat("/lobby"); setTimeout(() => {minecraftClient.chat("/play skyblock")}, 5000)}, 1000);
+                } else if (parsedMessage.gametype === 'SKYBLOCK') {
+                    return minecraftClient.chat("/warp home");
+                }
             }
         } catch (e) {}
 
@@ -150,15 +116,7 @@ module.exports = {
 
             if (splitMessage[2]?.includes(config.minecraft.ingameName) || splitMessage[3]?.includes(config.minecraft.ingameName)) {
                 try {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    react(sentMsg, '✅');
-=======
                     react(nodeemoji.emojify(sentMsg.split(" ✎ ").length > 0 ? sentMsg.split(" ✎ ").slice(0, -1).join(" ✎ ") : sentMsg, n => ":" + name + ":"), '✅');
->>>>>>> 4b14611 (init)
-=======
-                    react(nodeemoji.emojify(sentMsg.split(" ✎ ").length > 0 ? sentMsg.split(" ✎ ").slice(0, -1).join(" ✎ ") : sentMsg, n => ":" + name + ":"), '✅');
->>>>>>> 927c547 (fixed data files to not be included)
                 } catch (e) {}
 
                 if (!sentMsg.startsWith('@')) return;
@@ -175,16 +133,9 @@ module.exports = {
             if (msgString.startsWith('Guild')) {
                 const bridgeChannel = discordClient.channels.cache.get(config.channels.guildIngameChat);
                 if (bridgeChannel) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    await bridgeChannel.send({
-                        files: [new MessageAttachment(generateMessageImage(msgStringColor.substring(10)), `${messageAuthor}.png`)],
-=======
-=======
->>>>>>> 927c547 (fixed data files to not be included)
                     //console.log(msgStringColor, messageAuthor);
                     let msgtosend = msgStringColor.substring(10)
-                    if (messageAuthor == config.minecraft.ingameName && msgString.startsWith("Guild > game_let [MOD]: @")) {
+                    if (messageAuthor == config.minecraft.ingameName && msgString.match(new RegExp(`^Guild > ${config.minecraft.ingameName} \\[[\\w\\d]+\\]: @`, "i"))) {
 			//console.log(msgtosend)
 			//console.log(msgtosend.match(/@([\S]+)/))
 			//console.log(msgtosend.match(/@([\S]+)'s/))
@@ -193,10 +144,6 @@ module.exports = {
                     }
                     await bridgeChannel.send({
                         files: [new MessageAttachment(generateMessageImage(msgtosend), `${messageAuthor}.png`)],
-<<<<<<< HEAD
->>>>>>> 4b14611 (init)
-=======
->>>>>>> 927c547 (fixed data files to not be included)
                     });
 
                     if (includedURLs.length > 0) {
@@ -219,18 +166,8 @@ module.exports = {
             }
         }
         if (isGuildEvent(msgString)) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            const msg = msgString.includes('Guild >') ? msgStringColor.substring(12) : msgStringColor;
-            const formattedMessage = isShortGuildEvent(msgString) ? msg : `§b${'-'.repeat(40)}\nn${msg}\nn§b${'-'.repeat(40)}`;
-=======
             const msg = msgString.includes('Guild >') ? msgStringColor.substring(10) : msgStringColor;
             const formattedMessage = isShortGuildEvent(msgString) ? msg : `§b${'-'.repeat(40)}\n${msg}\n§b${'-'.repeat(40)}`;
->>>>>>> 4b14611 (init)
-=======
-            const msg = msgString.includes('Guild >') ? msgStringColor.substring(10) : msgStringColor;
-            const formattedMessage = isShortGuildEvent(msgString) ? msg : `§b${'-'.repeat(40)}\n${msg}\n§b${'-'.repeat(40)}`;
->>>>>>> 927c547 (fixed data files to not be included)
             const bridgeChannel = discordClient.channels.cache.get(config.channels.guildIngameChat);
             if (bridgeChannel) {
                 await bridgeChannel.send({
@@ -251,16 +188,8 @@ module.exports = {
             }
         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 	if (msgString.startsWith("From [MVP+] let_game: !c ")) setTimeout(() => minecraftClient.chat(msgString.replace("From [MVP+] let_game: !c ", "")), 500);
 
->>>>>>> 4b14611 (init)
-=======
-	if (msgString.startsWith("From [MVP+] let_game: !c ")) setTimeout(() => minecraftClient.chat(msgString.replace("From [MVP+] let_game: !c ", "")), 500);
-
->>>>>>> 927c547 (fixed data files to not be included)
         // GUILD REQUIREMENT MANAGMENT
         if (config.guildRequirement.enabled) {
             if (msgString.includes('has requested to join the Guild!') && !msgString.includes('Guild >')) {
@@ -270,16 +199,6 @@ module.exports = {
                         const username = command.split(' ')[2];
                         const uuid = await nameToUUID(username);
                         if (uuid) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                            const userRequirements = await getRequirements(uuid);
-                            let requirementsMet = 0;
-                            let requirementsMetSkyblock = 0;
-                            let requirementsMetBedwars = 0;
-                            let requirementsDescription = `${username}: `;
-=======
-=======
->>>>>>> 927c547 (fixed data files to not be included)
                             if (require("../../data/blacklist.json").minecraftUsers.includes(uuid)) return minecraftClient.chat(`/oc ${username} (${uuid}) is blacklisted, ignoring requirements check!`);
 
                             const userRequirements = await getRequirements(uuid);
@@ -293,10 +212,6 @@ module.exports = {
 
                             let requirementsMet = 0;
                             let requirementsDescription = "";
-<<<<<<< HEAD
->>>>>>> 4b14611 (init)
-=======
->>>>>>> 927c547 (fixed data files to not be included)
                             for (const [stat, requirement] of Object.entries(config.guildRequirement.requirements)) {
                                 if (requirement instanceof Object && stat === 'slayer') {
                                     let slayerRequirementsMet = 0;
@@ -307,73 +222,20 @@ module.exports = {
                                         }
                                         slayerDescription.push(userRequirements.slayer[slayerType] || 0);
                                     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                    if (slayerRequirementsMet >= Object.keys(requirement).length) {
-                                        requirementsMet++;
-                                        requirementsMetSkyblock++;
-                                    }
-=======
                                     if (slayerRequirementsMet >= Object.keys(requirement).length) requirementsMet++;
->>>>>>> 4b14611 (init)
-=======
-                                    if (slayerRequirementsMet >= Object.keys(requirement).length) requirementsMet++;
->>>>>>> 927c547 (fixed data files to not be included)
                                     requirementsDescription += `${stat.toUpperCase()}: ${slayerDescription.join('/')} ${
                                         slayerRequirementsMet >= Object.keys(requirement).length ? '✔' : '✖'
                                     } |`;
                                 } else {
                                     if (userRequirements[stat] >= requirement) {
                                         requirementsMet++;
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                        if (!stat.includes('bw')) requirementsMetSkyblock++;
-                                        else requirementsMetBedwars++;
-                                        requirementsDescription += `${SHORT_STATS[stat]}: ${addCommas(userRequirements[stat]?.toFixed())} ✔|`;
-                                    } else {
-                                        requirementsDescription += `${SHORT_STATS[stat]}: ${addCommas(userRequirements[stat]?.toFixed())} ✖|`;
-=======
                                         requirementsDescription += `${SHORT_STATS[stat]}: ${addCommas(userRequirements[stat]?.toFixed())} ✔ | `;
                                     } else {
                                         requirementsDescription += `${SHORT_STATS[stat]}: ${addCommas(userRequirements[stat]?.toFixed())} ✖ | `;
->>>>>>> 4b14611 (init)
-=======
-                                        requirementsDescription += `${SHORT_STATS[stat]}: ${addCommas(userRequirements[stat]?.toFixed())} ✔ | `;
-                                    } else {
-                                        requirementsDescription += `${SHORT_STATS[stat]}: ${addCommas(userRequirements[stat]?.toFixed())} ✖ | `;
->>>>>>> 927c547 (fixed data files to not be included)
                                     }
                                 }
                             }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-                            minecraftClient.chat(`/oc ${requirementsDescription}`);
-                            await sleep(1000);
-
-                            let totalBwStats = 0;
-                            for (const stat of Object.keys(config.guildRequirement.requirements)) {
-                                if (stat.includes('bw')) {
-                                    totalBwStats++;
-                                }
-                            }
-                            if (
-                                requirementsMet >=
-                                    (config.guildRequirement.minRequired || Object.keys(config.guildRequirement.requirements).length) ||
-                                (config.guildRequirement.acceptEitherSkyblockOrBedwars &&
-                                    (requirementsMetBedwars >= totalBwStats ||
-                                        requirementsMetSkyblock >= Object.keys(config.guildRequirement.requirements).length - totalBwStats))
-                            ) {
-                                if (config.guildRequirement.autoAccept) {
-                                    const blacklist = (config.guildRequirement.autoAcceptBlacklist || []).map((b) => b.toLowerCase());
-                                    if (blacklist.includes(uuid.toLowerCase()) || blacklist.includes(username.toLowerCase())) {
-                                        minecraftClient.chat(`/oc ${username} is blacklisted!`);
-                                    } else {
-                                        minecraftClient.chat(command);
-                                    }
-=======
-=======
->>>>>>> 927c547 (fixed data files to not be included)
                             requirementsDescription += `INSERVER: ${user ? "✔" : "✖"} | `
                             requirementsDescription += `MEE6LV15: ${overLevel15 ? "✔" : "✖"} | `
 
@@ -385,34 +247,17 @@ module.exports = {
                             ) {
                                 if (config.guildRequirement.autoAccept) {
                                     minecraftClient.chat(command);
-<<<<<<< HEAD
->>>>>>> 4b14611 (init)
-=======
->>>>>>> 927c547 (fixed data files to not be included)
                                 } else {
                                     minecraftClient.chat(`/oc ${username} meets the requirements!`);
                                 }
                             } else {
                                 minecraftClient.chat(`/oc ${username} has not met the requirements!`);
-<<<<<<< HEAD
-<<<<<<< HEAD
-                            }
-
-                            const { sendDiscordMessage } = require('../discord/ready');
-                            const embed = getRequirementEmbed(userRequirements, username, true, uuid);
-=======
-=======
->>>>>>> 927c547 (fixed data files to not be included)
                                 await sleep(1000);
                                 minecraftClient.chat(`/msg ${username} You don't meet the requirements! ${requirementsDescription}`)
                             }
 
                             const { sendDiscordMessage } = require('../discord/ready');
                             const embed = getRequirementEmbed(userRequirements, username, true, discordLink, user, overLevel15);
-<<<<<<< HEAD
->>>>>>> 4b14611 (init)
-=======
->>>>>>> 927c547 (fixed data files to not be included)
                             sendDiscordMessage({
                                 channelId: config.channels.officerIngameChat,
                                 messageObject: { embeds: [embed] },

@@ -35,6 +35,7 @@ const skillTables = {
         3169809640, 3369809640,
     ],
     slayer: [0, 5, 15, 200, 1000, 5000, 20000, 100000, 400000, 1000000],
+    slayer_vampire: [0, 20, 75, 240, 840, 2400],
     maxLevels: {
         default: 60,
         farming: 60,
@@ -51,6 +52,7 @@ const skillTables = {
         dungeoneering: 64,
         dungeonClass: 50,
         slayer: 9,
+        slayer_vampire: 5,
     },
 };
 

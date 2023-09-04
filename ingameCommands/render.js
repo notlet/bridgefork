@@ -5,16 +5,8 @@ const imgur = require('imgur-anonymous-uploader');
 
 module.exports = {
     name: 'render',
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     description: 'Render a player\'s item.',
     args: '[ign] [profile] (slot)',
->>>>>>> 4b14611 (init)
-=======
-    description: 'Render a player\'s item.',
-    args: '[ign] [profile] (slot)',
->>>>>>> 927c547 (fixed data files to not be included)
     execute: async (discordClient, message, messageAuthor) => {
         if (config.ingameCommands.render && config.keys.imgurClientId) {
             const uploader = new imgur(config.keys.imgurClientId);
@@ -34,16 +26,9 @@ module.exports = {
             if (itemNumber < 1 || itemNumber > 9 || !itemNumber)
                 return minecraftClient.chat(`/gc @${messageAuthor} Invalid item number. Must be between 1 and 9.`);
 
-            const searchedPlayer = await getPlayer(username, profile).catch((err) => {
-                return minecraftClient.chat(`/gc @${messageAuthor} ${err}`);
-            });
-<<<<<<< HEAD
-<<<<<<< HEAD
-            if (!searchedPlayer) return;
-=======
->>>>>>> 4b14611 (init)
-=======
->>>>>>> 927c547 (fixed data files to not be included)
+            const searchedPlayer = await getPlayer(username, profile).catch((err) => minecraftClient.chat(`/gc @${messageAuthor} ${err}`));
+            username = searchedPlayer.username;
+            
             const playerProfile = searchedPlayer.memberData;
 
             const inventory = playerProfile?.inv_contents?.data;

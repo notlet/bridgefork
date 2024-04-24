@@ -194,7 +194,7 @@ function getRequirementEmbed(requirementData, username, officerChatMessage, uuid
     else return result;
 }
 
-function getRequirementEmbed(requirementData, username, officerChatMessage, discordLink, user, overLevel15) {
+function getRequirementEmbed(requirementData, username, officerChatMessage, discordLink, user, overLevel10) {
     let requirementsMet = 0;
     const requirementsEmbed = new MessageEmbed().setTitle(`${username}'s Requirements${discordLink ? " (" + discordLink + ")" : ""}`).setColor('BLURPLE');
 <<<<<<< HEAD
@@ -281,11 +281,11 @@ function getRequirementEmbed(requirementData, username, officerChatMessage, disc
 >>>>>>> 927c547 (fixed data files to not be included)
 
     requirementsDescription.push(`**Is in Server**: ${user ? "✅" : "⛔"}`);
-    requirementsDescription.push(`**Over MEE6 Lvl 15**: ${overLevel15 ? "✅" : "⛔"}`);
+    requirementsDescription.push(`**Over MEE6 Lvl 10**: ${overLevel10 ? "✅" : "⛔"}`);
 
     if (config.guildRequirement.autoAccept) {
         requirementsDescription.unshift('');
-        if ((requirementsMet >= (config.guildRequirement.minRequired || Object.keys(config.guildRequirement.requirements).length)) && (user && overLevel15)) {
+        if ((requirementsMet >= (config.guildRequirement.minRequired || Object.keys(config.guildRequirement.requirements).length)) && (user && overLevel10)) {
             if (officerChatMessage) {
                 requirementsDescription.unshift(`**${username}** has met the requirements and automatically got accepted!`);
             } else {

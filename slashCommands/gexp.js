@@ -29,15 +29,7 @@ module.exports = {
                 if (!playerData) return interaction.editReply({ content: 'Guild Member not found.' });
 
                 const embeds = [];
-<<<<<<< HEAD
-<<<<<<< HEAD
                 const pages = Number(toFixed((playerData.gexpHistory.length || 0) / 20)) + ((playerData.gexpHistory.length || 1) % 20 == 0 ? 0 : 1);
-=======
-                const pages = Number(toFixed((playerData.gexpHistory.length || 0) / 20)) + (((playerData.gexpHistory.length || 1) % 20) == 0 ? 0 : 1);
->>>>>>> 4b14611 (init)
-=======
-                const pages = Number(toFixed((playerData.gexpHistory.length || 0) / 20)) + (((playerData.gexpHistory.length || 1) % 20) == 0 ? 0 : 1);
->>>>>>> 927c547 (fixed data files to not be included)
                 for (let i = 0; i < pages; i++) {
                     const embed = new MessageEmbed()
                         .setTitle(`${lowerToNormal[playerInput.toLowerCase()]}'s Guild Exp`)
@@ -53,13 +45,7 @@ module.exports = {
                                 ${
                                     playerData.gexpHistory.length > 0
                                         ? playerData.gexpHistory
-<<<<<<< HEAD
-<<<<<<< HEAD
                                               .reverse()
-=======
->>>>>>> 4b14611 (init)
-=======
->>>>>>> 927c547 (fixed data files to not be included)
                                               .slice(i * 20, i * 20 + 20)
                                               .map((history) => {
                                                   return `<t:${history.date}:d> \`${addCommas(history.gexp)}\``;

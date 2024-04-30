@@ -66,11 +66,6 @@ module.exports = {
             ],
         });
     },
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 927c547 (fixed data files to not be included)
     async forceLink (id, name) {
 	try {
 		const playerData = await getGuildMemberData(name);
@@ -83,8 +78,4 @@ module.exports = {
 		return "everything went well (hopefully)\n" + JSON.stringify(linkUsernames);
 	} catch (e) {return "error, letgame probably did something wrong because hes stupid " + e; }
     }
-<<<<<<< HEAD
->>>>>>> 4b14611 (init)
-=======
->>>>>>> 927c547 (fixed data files to not be included)
 };
